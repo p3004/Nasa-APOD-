@@ -4,15 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorBackground"
+    tools:context=".ui.main.MainActivity">
 
-    <TextView
+
+    <ImageView
+        android:id="@+id/ivMainApodBackgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/main_background_gradient"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvMainTitleText"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:text="Bright Planetary Nebula NGC 7027 from Hubble"
+        android:textColor="@color/colorWhite"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@id/glMainVerticalTextAndButtonSeparator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glMainVerticalTextAndButtonSeparator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvMainDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:ellipsize="end"
+        android:lineSpacingExtra="3dp"
+        android:maxLines="10"
+        android:paddingHorizontal="10dp"
+        android:text="When the lake calmed down, many wonders of the land and sky appeared twice. Perhaps the most dramatic from the dark sky was the central band of our Milky Way Galaxy, visible as a diagonal band. Toward the right were both the Small (SMC) and Large (LMC) Magellanic Clouds, satellite galaxies of our Milky Way. Faint multicolored bands of airglow fanned across the night. Numerous bright stars were visible including Antares, while the bright planet Jupiter appears just above the image center. The featured image is a composite of exposures all taken from the same camera and from the same location within 30 minutes in mid-May from the shore of Lake Bonney Riverland in South Australia. Dead trees that extend from the lake were captured not only in silhouette, but reflection, while lights from the small town of Barmera were visible across the lake. In July, Jupiter and Saturn will rise toward the east just as the Sun sets in the west"
+        android:textColor="@color/colorWhite"
+        android:textSize="17sp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/glMainVerticalTextAndButtonSeparator"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fbMainFloatingZoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_zoom_in_24"
+        app:maxImageSize="40dp"
+        android:backgroundTint="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/glMainVerticalTextAndButtonSeparator" />
+
+
+    <ImageView
+        android:id="@+id/ivMainDatePicker"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baseline_date_range_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/glMainVerticalTextAndButtonSeparator"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/flMainFragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
