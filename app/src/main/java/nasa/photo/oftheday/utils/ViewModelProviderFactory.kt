@@ -3,6 +3,7 @@ package nasa.photo.oftheday.utils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
+import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 /**
@@ -12,7 +13,7 @@ import kotlin.reflect.KClass
 /**
 * A ViewModel provider factory class , for creating VieModel class with any number of dependencies in its constructor
 * */
-
+@Singleton
 class ViewModelProviderFactory<T: ViewModel> (
 
     private val kClass: KClass<T>,
