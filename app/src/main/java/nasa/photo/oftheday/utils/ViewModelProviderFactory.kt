@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 /**
 * A ViewModel provider factory class , for creating VieModel class with any number of dependencies in its constructor
 * */
-@Singleton
+
 class ViewModelProviderFactory<T: ViewModel> (
 
     private val kClass: KClass<T>,
