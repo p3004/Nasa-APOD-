@@ -10,4 +10,13 @@ import nasa.photo.oftheday.R
 
 class ImageFragment : Fragment() {
 
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
+
 }

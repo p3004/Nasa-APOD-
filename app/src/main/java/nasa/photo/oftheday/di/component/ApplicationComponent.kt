@@ -2,6 +2,7 @@ package nasa.photo.oftheday.di.component
 
 import dagger.Component
 import nasa.photo.oftheday.NasaApplication
+import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.data.remote.ApiService
 import nasa.photo.oftheday.di.module.ApplicationModule
 import nasa.photo.oftheday.utils.network.NetworkHelper
@@ -23,5 +24,7 @@ interface ApplicationComponent {
             fun getNetworkHelper() : NetworkHelper
 
             fun getSchedulerProvider() : SchedulerProvider
+
+            fun getApodRepository() : ApodRepository
 
 }
