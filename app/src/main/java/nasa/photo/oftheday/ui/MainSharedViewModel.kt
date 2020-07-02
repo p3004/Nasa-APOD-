@@ -1,8 +1,11 @@
 package nasa.photo.oftheday.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import nasa.photo.oftheday.utils.common.Resource
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import nasa.photo.oftheday.data.ApodRepository
+import nasa.photo.oftheday.data.model.ApodModel
 import nasa.photo.oftheday.utils.network.NetworkHelper
 import nasa.photo.oftheday.utils.rx.SchedulerProvider
 
@@ -14,9 +17,50 @@ class MainSharedViewModel(
     private val compositeDisposable: CompositeDisposable,
     private val schedulerProvider: SchedulerProvider,
     private val apodRepository: ApodRepository
-) : ViewModel(){
+) : ViewModel() {
+
+    init {
+        fetchPictureOfTheDay()
+    }
 
 
+    private val apodLiveData: MutableLiveData<Resource<ApodModel>> = MutableLiveData()
+
+    private fun checkInternetConnectivity(): Boolean {
+        return if (networkHelper.checkIsNetworkConnected()) {
+            true
+        } else {
+            apodLiveData.postValue(Resource.error(null, "No Internet Connection!"))
+            false
+        }
+
+    }
+
+
+    private fun fetchPictureOfTheDay() {
+        if (checkInternetConnectivity()) {
+            apodLiveData.postValue(Resource.loading(null))
+            compositeDisposable.addAll(
+                apodRepository.getPictureToday()
+                    .subscribeOn(schedulerProvider.io())
+                    .subscribe(
+                        {
+                            apodLiveData.postValue(Resource.success(it))
+                        },
+                        {
+                            apodLiveData.postValue(Resource.error(null, it.message))
+                        }
+                    )
+            )
+
+        }
+
+    }
+
+
+    fun getApodLiveData(): MutableLiveData<Resource<ApodModel>> {
+        return apodLiveData
+    }
 
 
 }

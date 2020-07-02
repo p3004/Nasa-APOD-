@@ -19,24 +19,22 @@ import javax.inject.Singleton
 class ApplicationModule(private val application: NasaApplication) {
 
 
+    @Singleton
+    @Provides
+    fun provideNetworkHelper(): NetworkHelper = NetworkHelper(application)
+
+
+    @Provides
+    fun provideRxSchedulerProvider(): SchedulerProvider = RxSchedulerProvider()
+
+
+    @Provides
+    fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
 
     @Singleton
     @Provides
-    fun provideNetworkHelper():NetworkHelper = NetworkHelper(application)
-
-
-
-    @Provides
-     fun provideRxSchedulerProvider() : SchedulerProvider = RxSchedulerProvider()
-
-
-    @Provides
-    fun provideCompositeDisposable() : CompositeDisposable = CompositeDisposable()
-
-
-    @Singleton
-    @Provides
-    fun provideApiService() : ApiService = RetrofitNetworking.create()
+    fun provideApiService(): ApiService = RetrofitNetworking.create()
 
 
 }

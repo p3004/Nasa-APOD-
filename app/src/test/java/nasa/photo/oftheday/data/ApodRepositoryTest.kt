@@ -3,6 +3,7 @@ package nasa.photo.oftheday.data
 import io.reactivex.rxjava3.core.Single
 import nasa.photo.oftheday.data.model.ApodModel
 import nasa.photo.oftheday.data.remote.ApiService
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,5 +60,9 @@ class ApodRepositoryTest {
 
     }
 
+    @After
+    fun dispose(){
+
+    }
 
 }

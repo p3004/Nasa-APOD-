@@ -1,6 +1,7 @@
 package nasa.photo.oftheday.di.component
 
 import dagger.Component
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import nasa.photo.oftheday.NasaApplication
 import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.data.remote.ApiService
@@ -26,5 +27,7 @@ interface ApplicationComponent {
             fun getSchedulerProvider() : SchedulerProvider
 
             fun getApodRepository() : ApodRepository
+
+            fun getCompositeDisposable() : CompositeDisposable
 
 }
