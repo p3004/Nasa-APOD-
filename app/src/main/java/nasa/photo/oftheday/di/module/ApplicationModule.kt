@@ -18,6 +18,8 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val application: NasaApplication) {
 
+
+
     @Singleton
     @Provides
     fun provideNetworkHelper():NetworkHelper = NetworkHelper(application)
@@ -25,7 +27,7 @@ class ApplicationModule(private val application: NasaApplication) {
 
 
     @Provides
-    fun provideRxSchedulerProvider() : SchedulerProvider = RxSchedulerProvider()
+     fun provideRxSchedulerProvider() : SchedulerProvider = RxSchedulerProvider()
 
 
     @Provides

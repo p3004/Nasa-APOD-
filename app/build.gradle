@@ -90,5 +90,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "androidx.arch.core:core-testing:$arch_version"
+    testImplementation "org.hamcrest:hamcrest:$hamcrest_version"
 
 }

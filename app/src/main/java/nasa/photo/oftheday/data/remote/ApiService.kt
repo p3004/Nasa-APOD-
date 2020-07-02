@@ -18,7 +18,7 @@ interface ApiService {
 
     @GET(Endpoints.APOD)
     fun getPictureByDate(
-        @Query("api_key") apiKey : String = "DEMO_KEY",
+        @Query("api_key") apiKey : String? = "DEMO_KEY",
         @Query("date") date : String?
     ):Single<ApodModel>
 
