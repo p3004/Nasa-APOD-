@@ -1,5 +1,6 @@
 package nasa.photo.oftheday.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import nasa.photo.oftheday.utils.common.Resource
@@ -19,12 +20,14 @@ class MainSharedViewModel(
     private val apodRepository: ApodRepository
 ) : ViewModel() {
 
+    private val apodLiveData: MutableLiveData<Resource<ApodModel>> = MutableLiveData()
+    val apodExposedLiveData : LiveData<Resource<ApodModel>>  = apodLiveData
+
     init {
         fetchPictureOfTheDay()
     }
 
 
-    private val apodLiveData: MutableLiveData<Resource<ApodModel>> = MutableLiveData()
 
     private fun checkInternetConnectivity(): Boolean {
         return if (networkHelper.checkIsNetworkConnected()) {
@@ -58,9 +61,7 @@ class MainSharedViewModel(
     }
 
 
-    fun getApodLiveData(): MutableLiveData<Resource<ApodModel>> {
-        return apodLiveData
-    }
+
 
 
 }
