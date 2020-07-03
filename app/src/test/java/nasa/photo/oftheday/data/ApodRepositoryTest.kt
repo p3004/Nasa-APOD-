@@ -55,7 +55,6 @@ class ApodRepositoryTest {
             .getPictureByDate("DEMO_KEY",date)
 
         apodRepository.getPictureByDate(date)
-
         verify(apiService).getPictureByDate("DEMO_KEY",date)
 
     }

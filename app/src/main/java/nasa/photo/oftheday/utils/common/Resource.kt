@@ -16,7 +16,7 @@ data class Resource<out T> private constructor(val status: Status , val data : T
 
         fun <T> success(data : T?) : Resource<T> = Resource(Status.SUCCESS,data,null)
 
-        fun <T> error(data : T?,msg: String?) : Resource<T> = Resource(Status.ERROR,data,msg)
+        fun <T> error(msg: String?) : Resource<T> = Resource(Status.ERROR,null,msg)
 
     }
 

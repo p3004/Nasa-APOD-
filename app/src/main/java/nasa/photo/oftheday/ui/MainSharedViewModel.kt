@@ -20,12 +20,8 @@ class MainSharedViewModel(
     private val apodRepository: ApodRepository
 ) : ViewModel() {
 
-    private val apodLiveData: MutableLiveData<Resource<ApodModel>> = MutableLiveData()
-    val apodExposedLiveData : LiveData<Resource<ApodModel>>  = apodLiveData
-
-    init {
-        fetchPictureOfTheDay()
-    }
+    private val _apodLiveData : MutableLiveData<Resource<ApodModel>> = MutableLiveData()
+    val apodExposedLiveData : LiveData<Resource<ApodModel>>  = _apodLiveData
 
 
 
@@ -33,29 +29,29 @@ class MainSharedViewModel(
         return if (networkHelper.checkIsNetworkConnected()) {
             true
         } else {
-            apodLiveData.postValue(Resource.error(null, "No Internet Connection!"))
+            _apodLiveData.postValue(Resource.error( "No Internet Connection!"))
             false
         }
 
     }
 
 
-    private fun fetchPictureOfTheDay() {
+     fun fetchPictureOfTheDay() {
         if (checkInternetConnectivity()) {
-            apodLiveData.postValue(Resource.loading(null))
+
+            _apodLiveData.postValue(Resource.loading(null))
             compositeDisposable.addAll(
                 apodRepository.getPictureToday()
                     .subscribeOn(schedulerProvider.io())
                     .subscribe(
                         {
-                            apodLiveData.postValue(Resource.success(it))
+                            _apodLiveData.postValue(Resource.success(it))
                         },
                         {
-                            apodLiveData.postValue(Resource.error(null, it.message))
+                            _apodLiveData.postValue(Resource.error(it.message))
                         }
                     )
             )
-
         }
 
     }
