@@ -56,7 +56,10 @@ class MainSharedViewModel(
 
     }
 
-
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
+    }
 
 
 
