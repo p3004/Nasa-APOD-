@@ -1,6 +1,5 @@
 package nasa.photo.oftheday.data.remote
 
-import android.os.Build
 import nasa.photo.oftheday.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

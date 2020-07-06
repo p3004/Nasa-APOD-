@@ -22,4 +22,9 @@ class NasaApplication : Application() {
     }
 
 
+    // Needed to replace the component with a test specific one
+    fun setApplicationComponentForTest(applicationComponent: ApplicationComponent){
+        this.applicationComponent = applicationComponent
+    }
+
 }

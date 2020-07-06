@@ -4,25 +4,24 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import nasa.photo.oftheday.NasaApplication
+import nasa.photo.oftheday.data.FakeApiService
 import nasa.photo.oftheday.data.remote.ApiService
-import nasa.photo.oftheday.data.remote.RetrofitNetworking
+import nasa.photo.oftheday.utils.network.FakeNetworkHelper
 import nasa.photo.oftheday.utils.network.NetworkHelper
-import nasa.photo.oftheday.utils.network.NetworkHelperImpl
 import nasa.photo.oftheday.utils.rx.RxSchedulerProvider
 import nasa.photo.oftheday.utils.rx.SchedulerProvider
 import javax.inject.Singleton
 
 /**
- * Created by Pallab Banerjee on 7/1/2020.
+ * Created by Pallab Banerjee on 7/6/2020.
  */
 
 @Module
-class ApplicationModule(private val application: NasaApplication) {
-
+class ApplicationModuleForTest(private val application : NasaApplication){
 
     @Singleton
     @Provides
-    fun provideNetworkHelper(): NetworkHelper = NetworkHelperImpl(application)
+    fun provideNetworkHelper(): NetworkHelper = FakeNetworkHelper()
 
 
     @Provides
@@ -35,7 +34,9 @@ class ApplicationModule(private val application: NasaApplication) {
 
     @Singleton
     @Provides
-    fun provideApiService(): ApiService = RetrofitNetworking.create()
+    fun provideApiService(): ApiService = FakeApiService()
+
+
 
 
 }

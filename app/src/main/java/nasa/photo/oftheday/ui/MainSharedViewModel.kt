@@ -8,13 +8,14 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.data.model.ApodModel
 import nasa.photo.oftheday.utils.network.NetworkHelper
+import nasa.photo.oftheday.utils.network.NetworkHelperImpl
 import nasa.photo.oftheday.utils.rx.SchedulerProvider
 
 /**
  * Created by Pallab Banerjee on 7/1/2020.
  */
 class MainSharedViewModel(
-    private val networkHelper: NetworkHelper,
+    private val networkHelperImpl: NetworkHelper,
     private val compositeDisposable: CompositeDisposable,
     private val schedulerProvider: SchedulerProvider,
     private val apodRepository: ApodRepository
@@ -26,7 +27,7 @@ class MainSharedViewModel(
 
 
     private fun checkInternetConnectivity(): Boolean {
-        return if (networkHelper.checkIsNetworkConnected()) {
+        return if (networkHelperImpl.checkIsNetworkConnected()) {
             true
         } else {
             _apodLiveData.postValue(Resource.error( "No Internet Connection!"))

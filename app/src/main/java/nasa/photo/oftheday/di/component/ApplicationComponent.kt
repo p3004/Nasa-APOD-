@@ -7,6 +7,7 @@ import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.data.remote.ApiService
 import nasa.photo.oftheday.di.module.ApplicationModule
 import nasa.photo.oftheday.utils.network.NetworkHelper
+import nasa.photo.oftheday.utils.network.NetworkHelperImpl
 import nasa.photo.oftheday.utils.rx.SchedulerProvider
 import javax.inject.Singleton
 

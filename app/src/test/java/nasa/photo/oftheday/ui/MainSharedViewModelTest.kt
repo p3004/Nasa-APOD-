@@ -2,17 +2,14 @@ package nasa.photo.oftheday.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.functions.Supplier
 import io.reactivex.rxjava3.schedulers.TestScheduler
 import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.data.model.ApodModel
 import nasa.photo.oftheday.utils.common.Resource
-import nasa.photo.oftheday.utils.network.NetworkHelper
+import nasa.photo.oftheday.utils.network.NetworkHelperImpl
 import nasa.photo.oftheday.utils.rx.TestSchedulerProvider
-import okio.IOException
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -22,7 +19,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import java.lang.Exception
-import java.util.*
 
 /**
  * Created by Pallab Banerjee on 7/3/2020.
@@ -39,7 +35,7 @@ class MainSharedViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var networkHelper: NetworkHelper
+    private lateinit var networkHelperImpl: NetworkHelperImpl
 
     @Mock
     private lateinit var apodRepository: ApodRepository
@@ -62,7 +58,7 @@ class MainSharedViewModelTest {
         testScheduler = TestScheduler()
         val testSchedulerProvider = TestSchedulerProvider(testScheduler)
         mainSharedViewModel = MainSharedViewModel(
-            networkHelper,
+            networkHelperImpl,
             compositeDisposable,
             testSchedulerProvider,
             apodRepository
@@ -76,7 +72,7 @@ class MainSharedViewModelTest {
     fun givenNoInternet_whenFetchPictureOfTheDay_shouldShowNetworkError() {
 
         doReturn(false)
-            .`when`(networkHelper)
+            .`when`(networkHelperImpl)
             .checkIsNetworkConnected()
        mainSharedViewModel.fetchPictureOfTheDay()
         verify(apodDataObserver).onChanged(Resource.error("No Internet Connection!"))
@@ -88,7 +84,7 @@ class MainSharedViewModelTest {
     fun givenServerResponse200_whenFetchPictureOfTheDay_shouldExposeApodDataViaLiveData(){
 
         doReturn(true)
-            .`when`(networkHelper)
+            .`when`(networkHelperImpl)
             .checkIsNetworkConnected()
         doReturn(Single.just(apodModel))
             .`when`(apodRepository)
@@ -105,7 +101,7 @@ class MainSharedViewModelTest {
     fun givenServerError_whenFetchPictureOfTheDay_shouldShowError(){
 
         doReturn(true)
-            .`when`(networkHelper)
+            .`when`(networkHelperImpl)
             .checkIsNetworkConnected()
 
         doReturn(Single.error<Exception>(Exception("Error")))

@@ -9,6 +9,7 @@ import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.ui.MainSharedViewModel
 import nasa.photo.oftheday.utils.ViewModelProviderFactory
 import nasa.photo.oftheday.utils.network.NetworkHelper
+import nasa.photo.oftheday.utils.network.NetworkHelperImpl
 import nasa.photo.oftheday.utils.rx.SchedulerProvider
 
 /**
@@ -20,10 +21,10 @@ class FragmentModule(private val fragment : Fragment) {
 
     @Provides
     fun provideMainSharedViewModel(
-        networkHelper: NetworkHelper,
+        networkHelperImpl: NetworkHelper,
         compositeDisposable: CompositeDisposable,
         schedulerProvider: SchedulerProvider,
         apodRepository: ApodRepository
-    ) : MainSharedViewModel = ViewModelProvider(fragment.activity!!,ViewModelProviderFactory(MainSharedViewModel::class){MainSharedViewModel(networkHelper,compositeDisposable,schedulerProvider,apodRepository)}).get(MainSharedViewModel::class.java)
+    ) : MainSharedViewModel = ViewModelProvider(fragment.activity!!,ViewModelProviderFactory(MainSharedViewModel::class){MainSharedViewModel(networkHelperImpl,compositeDisposable,schedulerProvider,apodRepository)}).get(MainSharedViewModel::class.java)
 
 }
