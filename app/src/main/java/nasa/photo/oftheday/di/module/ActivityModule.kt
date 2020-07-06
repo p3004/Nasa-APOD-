@@ -2,11 +2,13 @@ package nasa.photo.oftheday.di.module
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import nasa.photo.oftheday.data.ApodRepository
 import nasa.photo.oftheday.ui.MainSharedViewModel
+import nasa.photo.oftheday.ui.main.MainViewModel
 import nasa.photo.oftheday.utils.ViewModelProviderFactory
 import nasa.photo.oftheday.utils.network.NetworkHelper
 import nasa.photo.oftheday.utils.network.NetworkHelperImpl
@@ -29,5 +31,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
       ) : MainSharedViewModel = ViewModelProvider(activity,ViewModelProviderFactory(MainSharedViewModel::class){
           MainSharedViewModel(networkHelperImpl,compositeDisposable,schedulerProvider,apodRepository)
       }).get(MainSharedViewModel::class.java)
+
+
+    @Provides
+    fun provideMainViewModel() : MainViewModel = ViewModelProvider(activity).get(MainViewModel::class.java)
+
 
 }

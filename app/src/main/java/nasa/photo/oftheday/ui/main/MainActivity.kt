@@ -4,16 +4,19 @@ import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import nasa.photo.oftheday.NasaApplication
 import nasa.photo.oftheday.R
 import nasa.photo.oftheday.di.component.DaggerActivityComponent
 import nasa.photo.oftheday.di.module.ActivityModule
 import nasa.photo.oftheday.ui.MainSharedViewModel
+import nasa.photo.oftheday.ui.description.DescriptionFragment
 import nasa.photo.oftheday.utils.common.Status
 import javax.inject.Inject
 
@@ -21,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mainSharedViewModel: MainSharedViewModel
+
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectBuilder()
@@ -30,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         setObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        tvMainDescription.setOnClickListener {
+            mainViewModel.descriptionNavigation()
+        }
+    }
 
 
     private fun injectBuilder() {
@@ -48,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 Status.LOADING -> {
                     pbMain.visibility = View.VISIBLE
                     ivMainDatePicker.visibility = View.GONE
-                      }
+                }
 
                 Status.SUCCESS -> {
                     Glide.with(this)
@@ -73,6 +87,32 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+
+        mainViewModel.showDescriptionFragmentLiveData.observe(this, Observer {
+            it?.getIfHandled().run {
+            showDescriptionFragment()
+            }
+
+
+        })
+
+
+    }
+
+
+    fun showDescriptionFragment() {
+        flMainContainer.visibility = View.VISIBLE
+        val fragmentTransaction  = supportFragmentManager.beginTransaction()
+        var fragment = supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) as DescriptionFragment?
+        if(fragment == null){
+            fragment = DescriptionFragment.newInstance()
+            fragmentTransaction.add(R.id.flMainContainer,fragment,DescriptionFragment.TAG)
+        }else
+        {
+            fragmentTransaction.show(fragment)
+        }
+        fragmentTransaction.commit()
 
 
     }

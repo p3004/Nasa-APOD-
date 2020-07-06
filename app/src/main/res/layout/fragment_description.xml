@@ -7,21 +7,55 @@
     tools:context=".ui.description.DescriptionFragment"
     android:background="@color/colorBackground">
 
+
+    <ImageView
+        android:id="@+id/ivDescImage"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/main_background_gradient"
+        />
+
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvDescTitle"
+        android:layout_width="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivDescImage"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:paddingHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorWhite"
+        android:text="Bright Planetary Nebula NGC 7027 from Hubble"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDescDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorWhite"
-        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:lineSpacingExtra="6dp"
-        android:text="Bright Planetary Nebula NGC 7027 from Hubble"
-        />
-
+        android:paddingHorizontal="10dp"
+        android:textSize="17sp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintTop_toBottomOf="@id/tvDescTitle"/>
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -31,13 +65,15 @@
         android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDescTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvDescDate"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="When the lake calmed down, many wonders of the land and sky appeared twice. Perhaps the most dramatic from the dark sky was the central band of our Milky Way Galaxy, visible as a diagonal band. Toward the right were both the Small (SMC) and Large (LMC) Magellanic Clouds, satellite galaxies of our Milky Way. Faint multicolored bands of airglow fanned across the night. Numerous bright stars were visible including Antares, while the bright planet Jupiter appears just above the image center. The featured image is a composite of exposures all taken from the same camera and from the same location within 30 minutes in mid-May from the shore of Lake Bonney Riverland in South Australia. Dead trees that extend from the lake were captured not only in silhouette, but reflection, while lights from the small town of Barmera were visible across the lake. In July, Jupiter and Saturn will rise toward the east just as the Sun sets in the west"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="4dp"
+        android:paddingHorizontal="10dp"
         android:textColor="@color/colorWhite"
-        android:lineSpacingExtra="8dp"
-        android:textSize="18sp"
-        android:padding="20dp"
+        android:textSize="15sp"
         />
 
 
