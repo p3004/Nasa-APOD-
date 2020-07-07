@@ -1,9 +1,8 @@
-package nasa.photo.oftheday.ui.date
+package nasa.photo.oftheday.ui.main.date
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import nasa.photo.oftheday.ui.main.MainActivity

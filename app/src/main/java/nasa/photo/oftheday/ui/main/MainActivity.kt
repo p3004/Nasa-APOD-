@@ -1,22 +1,20 @@
 package nasa.photo.oftheday.ui.main
 
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import nasa.photo.oftheday.NasaApplication
 import nasa.photo.oftheday.R
 import nasa.photo.oftheday.di.component.DaggerActivityComponent
 import nasa.photo.oftheday.di.module.ActivityModule
 import nasa.photo.oftheday.ui.MainSharedViewModel
-import nasa.photo.oftheday.ui.date.DatePickerFragment
+import nasa.photo.oftheday.ui.main.date.DatePickerFragment
 import nasa.photo.oftheday.ui.description.DescriptionFragment
 import nasa.photo.oftheday.utils.common.Status
 import javax.inject.Inject
@@ -29,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mainViewModel: MainViewModel
 
+    private lateinit var activeFragment : Fragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         injectBuilder()
         super.onCreate(savedInstanceState)
@@ -39,9 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         tvMainDescription.setOnClickListener {
             mainViewModel.descriptionNavigation()
         }
+
         ivMainDatePicker.setOnClickListener {
             val newFragment = DatePickerFragment()
             newFragment.show(supportFragmentManager, DatePickerFragment.TAG)
@@ -97,15 +99,13 @@ class MainActivity : AppCompatActivity() {
             it?.getIfHandled().run {
                 showDescriptionFragment()
             }
-
-
         })
 
 
     }
 
 
-    fun showDescriptionFragment() {
+    private fun showDescriptionFragment() {
         flMainContainer.visibility = View.VISIBLE
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         var fragment =
@@ -116,8 +116,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             fragmentTransaction.show(fragment)
         }
+        activeFragment = fragment
         fragmentTransaction.commit()
+    }
 
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) is DescriptionFragment)
+            supportFragmentManager.beginTransaction().remove(activeFragment).commit()
+        else  super.onBackPressed()
 
     }
 
