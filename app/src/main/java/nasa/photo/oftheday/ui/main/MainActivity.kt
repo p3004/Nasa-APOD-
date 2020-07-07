@@ -16,6 +16,7 @@ import nasa.photo.oftheday.R
 import nasa.photo.oftheday.di.component.DaggerActivityComponent
 import nasa.photo.oftheday.di.module.ActivityModule
 import nasa.photo.oftheday.ui.MainSharedViewModel
+import nasa.photo.oftheday.ui.date.DatePickerFragment
 import nasa.photo.oftheday.ui.description.DescriptionFragment
 import nasa.photo.oftheday.utils.common.Status
 import javax.inject.Inject
@@ -27,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectBuilder()
@@ -43,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         tvMainDescription.setOnClickListener {
             mainViewModel.descriptionNavigation()
         }
+        ivMainDatePicker.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.show(supportFragmentManager, DatePickerFragment.TAG)
+        }
+
     }
 
 
@@ -91,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.showDescriptionFragmentLiveData.observe(this, Observer {
             it?.getIfHandled().run {
-            showDescriptionFragment()
+                showDescriptionFragment()
             }
 
 
@@ -103,13 +107,13 @@ class MainActivity : AppCompatActivity() {
 
     fun showDescriptionFragment() {
         flMainContainer.visibility = View.VISIBLE
-        val fragmentTransaction  = supportFragmentManager.beginTransaction()
-        var fragment = supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) as DescriptionFragment?
-        if(fragment == null){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        var fragment =
+            supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) as DescriptionFragment?
+        if (fragment == null) {
             fragment = DescriptionFragment.newInstance()
-            fragmentTransaction.add(R.id.flMainContainer,fragment,DescriptionFragment.TAG)
-        }else
-        {
+            fragmentTransaction.add(R.id.flMainContainer, fragment, DescriptionFragment.TAG)
+        } else {
             fragmentTransaction.show(fragment)
         }
         fragmentTransaction.commit()

@@ -54,6 +54,29 @@ class MainSharedViewModel(
                     )
             )
         }
+    }
+
+
+    fun fetchPictureByDate(date : String){
+        if (checkInternetConnectivity()){
+
+            _apodLiveData.postValue(Resource.loading(null))
+            compositeDisposable.addAll(
+                apodRepository.getPictureByDate(date)
+                    .subscribeOn(schedulerProvider.io())
+                    .subscribe(
+                        {
+                            _apodLiveData.postValue(Resource.success(it))
+                        },
+                        {
+                            _apodLiveData.postValue(Resource.error(it.message))
+                        }
+                    )
+            )
+
+
+        }
+
 
     }
 
