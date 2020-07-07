@@ -43,6 +43,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -100,5 +103,6 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$arch_version"
     testImplementation "org.hamcrest:hamcrest:$hamcrest_version"
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
 }

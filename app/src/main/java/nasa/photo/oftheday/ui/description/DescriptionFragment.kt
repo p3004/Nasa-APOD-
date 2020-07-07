@@ -42,6 +42,7 @@ class DescriptionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
+       // mainSharedViewModel.fetchPictureOfTheDay()
         setUpObservers()
     }
 
@@ -77,7 +78,7 @@ class DescriptionFragment : Fragment() {
 
                 Status.SUCCESS -> {
                     Glide.with(this)
-                        .load(it.data?.hdurl)
+                        .load(it.data?.url)
                         .priority(Priority.HIGH)
                         .thumbnail(0.5f)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

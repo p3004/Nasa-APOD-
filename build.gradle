@@ -81,4 +81,7 @@ ext{
     //hamcrest
     hamcrest_version = '2.2'
 
+    //fragment_scenario_for_test
+    fragment_version = '1.3.0-alpha06'
+
 }
