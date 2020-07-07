@@ -9,5 +9,4 @@ import javax.inject.Singleton
 @Singleton
 class FakeNetworkHelper : NetworkHelper  {
     override fun checkIsNetworkConnected(): Boolean = true
-
 }

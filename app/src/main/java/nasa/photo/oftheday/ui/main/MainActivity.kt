@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
 
                 Status.SUCCESS -> {
                     Glide.with(this)
-                        .load(it.data?.hdurl)
-                        .priority(Priority.HIGH)
+                        .load(it.data?.url)
+                        .priority(Priority.IMMEDIATE)
                         .thumbnail(0.5f)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                         .into(ivMainApodBackgroundImage)

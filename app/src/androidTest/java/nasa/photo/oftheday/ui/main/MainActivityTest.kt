@@ -49,5 +49,13 @@ class MainActivityTest {
 
     }
 
+    @Test
+    fun givenNoInternet_checkIfErrorShowing(){
+
+        onView(withId(R.id.tvMainTitleText)).check(matches(withText("No Internet Connection!")))
+
+
+    }
+
 
 }

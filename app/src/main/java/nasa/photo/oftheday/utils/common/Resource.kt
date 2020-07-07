@@ -12,7 +12,7 @@ data class Resource<out T> private constructor(val status: Status , val data : T
 
     companion object{
 
-        fun <T> loading( data : T?) : Resource<T> = Resource(Status.LOADING,data,null)
+        fun <T> loading( data : T?) : Resource<T> = Resource(Status.LOADING,null,null)
 
         fun <T> success(data : T?) : Resource<T> = Resource(Status.SUCCESS,data,null)
 
