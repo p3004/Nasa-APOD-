@@ -19,7 +19,7 @@ import nasa.photo.oftheday.ui.description.DescriptionFragment
 import nasa.photo.oftheday.utils.common.Status
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DatePickerFragment.DateSetProvider {
 
     @Inject
     lateinit var mainSharedViewModel: MainSharedViewModel
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mainViewModel: MainViewModel
 
-    private lateinit var activeFragment : Fragment
+    private lateinit var activeFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectBuilder()
@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                     tvMainTitleText.text = it.msg
                 }
 
-
             }
 
         })
@@ -122,10 +121,14 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        if(supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) is DescriptionFragment)
+        if (supportFragmentManager.findFragmentByTag(DescriptionFragment.TAG) is DescriptionFragment)
             supportFragmentManager.beginTransaction().remove(activeFragment).commit()
-        else  super.onBackPressed()
+        else super.onBackPressed()
 
+    }
+
+    override fun getDate(date: String) {
+        mainSharedViewModel.fetchPictureByDate(date)
     }
 
 

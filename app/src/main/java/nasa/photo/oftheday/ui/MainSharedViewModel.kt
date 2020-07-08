@@ -26,6 +26,8 @@ class MainSharedViewModel(
 
 
 
+
+
     private fun checkInternetConnectivity(): Boolean {
         return if (networkHelperImpl.checkIsNetworkConnected()) {
             true

@@ -2,6 +2,7 @@ package nasa.photo.oftheday.ui.main.date
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
@@ -17,6 +18,18 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         const val TAG = "Date"
     }
 
+    internal lateinit var dateSetProvider: DateSetProvider
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+          dateSetProvider =  context as DateSetProvider
+        }catch (e : ClassCastException){
+            throw java.lang.ClassCastException((context.toString()) + "must implement DateSetProvider")
+        }
+
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -29,9 +42,12 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
         val date  = "$year-$month-$day"
-        if(activity is MainActivity){
-            (activity as MainActivity).mainSharedViewModel.fetchPictureByDate(date)
-        }
+        dateSetProvider.getDate(date)
+    }
+
+    interface DateSetProvider{
+        fun getDate(date : String)
+
     }
 
 }
