@@ -11,8 +11,20 @@ This application gets the Astronomy Picture of the Day (APOD)  data from Nasa's 
 - **JUnit4, Mockito** for local unit testing.
 - **Espresso** for UI testing.
 
+## Below are the screenshots
+
+
 ![APOD](screenshots/MainActivity.png "The main activity")
+
 ![Description](screenshots/DesrciptionFragment.png "Fragment showing full description")
 
 
-This app also features a DatePicker Dialog which can be used to pick any date which is <= today's date and can be used to fetch the APOD data for the picked date.
+
+
+ This app also features a DatePicker Dialog which can be used to pick any date which is <= today's date and can be used to fetch the APOD data for the picked date.
+
+## Screenshot for DatePicker
+
+
+
+ ![DatePicker](screenshots/DatePicker.png "The DatePickerDialog") 
