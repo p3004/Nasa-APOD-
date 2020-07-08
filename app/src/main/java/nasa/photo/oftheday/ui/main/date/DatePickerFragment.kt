@@ -27,7 +27,6 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         }catch (e : ClassCastException){
             throw java.lang.ClassCastException((context.toString()) + "must implement DateSetProvider")
         }
-
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
